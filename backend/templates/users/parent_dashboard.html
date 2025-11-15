@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+
+{% block title %}Parent Portal - Joyland Schools{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+  <div class="container">
+    <h1 class="dashboard-welcome animate-fade">Welcome, {{ user.get_full_name }}!</h1>
+    <p class="dashboard-subtitle animate-fade">Stay connected with your child's academic journey</p>
+  </div>
+</div>
+
+<div class="dashboard">
+  <div class="container">
+    <div class="row mt-8">
+      <div class="col-md-4 mb-6">
+        <div class="stat-card">
+          <div class="stat-value" data-count="5">0</div>
+          <div class="stat-label">Children Enrolled</div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-6">
+        <div class="stat-card">
+          <div class="stat-value" data-count="95">0</div>
+          <div class="stat-label">Class Average</div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-6">
+        <div class="stat-card">
+          <div class="stat-value" data-count="12">0</div>
+          <div class="stat-label">Assignments Due</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Links Section -->
+    <div class="mt-12">
+      <h2 class="mb-8">Quick Links</h2>
+      <div class="row">
+        <div class="col-md-6 col-lg-3 mb-6">
+          <div class="tool-card text-center">
+            <div class="tool-icon"><i class="fas fa-chart-line"></i></div>
+            <div class="tool-title">Academic Progress</div>
+            <div class="tool-description">View detailed performance reports</div>
+            <a href="#" class="btn btn-sm btn-primary mt-4">View</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-6">
+          <div class="tool-card text-center">
+            <div class="tool-icon"><i class="fas fa-calendar-check"></i></div>
+            <div class="tool-title">Attendance</div>
+            <div class="tool-description">Track attendance records</div>
+            <a href="#" class="btn btn-sm btn-primary mt-4">View</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-6">
+          <div class="tool-card text-center">
+            <div class="tool-icon"><i class="fas fa-bell"></i></div>
+            <div class="tool-title">Announcements</div>
+            <div class="tool-description">Important school notices</div>
+            <a href="#" class="btn btn-sm btn-primary mt-4">View</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-6">
+          <div class="tool-card text-center">
+            <div class="tool-icon"><i class="fas fa-envelope"></i></div>
+            <div class="tool-title">Messages</div>
+            <div class="tool-description">Communicate with teachers</div>
+            <a href="#" class="btn btn-sm btn-primary mt-4">View</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Link -->
+    <div class="mt-12 text-center">
+      <a href="{% url 'landing' %}" class="btn btn-outline">Back to Home</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

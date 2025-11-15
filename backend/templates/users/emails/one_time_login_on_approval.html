@@ -1,0 +1,12 @@
+<!doctype html>
+<html>
+  <body>
+    <div style="font-family:Arial,sans-serif;max-width:640px;margin:24px auto;padding:16px;border:1px solid #eee;border-radius:8px;">
+      <h3>Welcome to Joyland Schools</h3>
+      <p>Hi {{ user.get_full_name|default:user.username }},</p>
+      <p>Your registration was approved. Click below to sign in and set your password.</p>
+      <p><a href="{{ login_url }}" style="display:inline-block;padding:10px 16px;background:#0d6efd;color:#fff;border-radius:6px;text-decoration:none;">Sign in & set password</a></p>
+      <p style="color:#666">If the button doesn't work, paste this link into your browser: <br><a href="{{ login_url }}">{{ login_url }}</a></p>
+    </div>
+  </body>
+</html>

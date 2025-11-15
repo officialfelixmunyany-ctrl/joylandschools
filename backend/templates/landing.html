@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block title %}Joyland Schools{% endblock %}
+{% load static %}
+
+{% block extra_head %}
+  {# The responsive hero image logic has been moved to organic-background.css for clean separation of concerns. #}
+  {{ block.super }}
+{% endblock %}
+
+{% block content %}
+  <div class="landing-only">
+    
+    {# 1. Full-width Hero Section using the modern hero template and organic background #}
+  {% include 'includes/hero.html' %}
+
+    {# 2. Main content container starts below the full-width hero #}
+    <div class="site-panel display-panel container py-4 my-4" role="main" aria-label="Main display panel">
+
+      <div class="view-panel container-fluid">
+        {% include 'core/includes/announcements.html' %}
+        {% include 'core/includes/events_preview.html' %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

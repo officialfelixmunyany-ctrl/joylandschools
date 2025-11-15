@@ -1,0 +1,79 @@
+{% extends 'users/register_base.html' %}
+{% block form_fields %}
+  <div class="row g-3">
+    <div class="col-md-6">
+      {{ form.first_name.label_tag }}
+      {{ form.first_name }}
+      {% for err in form.first_name.errors %}<div class="invalid-feedback d-block">{{ err }}</div>{% endfor %}
+    </div>
+    <div class="col-md-6">
+      {{ form.last_name.label_tag }}
+      {{ form.last_name }}
+      {% for err in form.last_name.errors %}<div class="invalid-feedback d-block">{{ err }}</div>{% endfor %}
+    </div>
+
+    <div class="col-12 mt-2">
+      {{ form.email.label_tag }}
+      {{ form.email }}
+      {% for err in form.email.errors %}<div class="invalid-feedback d-block">{{ err }}</div>{% endfor %}
+    </div>
+
+    <div class="col-md-3 mt-2">
+      {{ form.country_code.label_tag }}
+      {{ form.country_code }}
+    </div>
+    <div class="col-md-9 mt-2">
+      {{ form.phone.label_tag }}
+      {{ form.phone }}
+    </div>
+
+    <div class="col-12 mt-2">
+      {{ form.address.label_tag }}
+      {{ form.address }}
+    </div>
+
+    <div class="col-12 mt-2"> <label class="form-label">Birth date</label> </div>
+    <div class="col-md-4">
+      {{ form.month }}
+    </div>
+    <div class="col-md-4">
+      {{ form.day }}
+    </div>
+    <div class="col-md-4">
+      {{ form.year }}
+    </div>
+
+    <div class="col-12 mt-3">
+      <label class="form-label">Where did you hear about us?</label>
+      <div class="form-check">
+        {{ form.heard_friend }} <label class="form-check-label" for="id_heard_friend">A friend or colleague</label>
+      </div>
+      <div class="form-check">
+        {{ form.heard_google }} <label class="form-check-label" for="id_heard_google">Google</label>
+      </div>
+      <div class="form-check">
+        {{ form.heard_other }} <label class="form-check-label" for="id_heard_other">Other</label>
+      </div>
+    </div>
+
+    <div class="col-12 mt-3">
+      <h6>Registration rules</h6>
+      <ol>
+        <li>Note: Selective for either the users.</li>
+        <li>Provide accurate personal information. False info will delay approval.</li>
+        <li>Students must supply a valid admission or assessment number when requested by the admin.</li>
+        <li>Teachers must provide a staff identifier for verification.</li>
+        <li>Parents must supply a related student's admission number where available.</li>
+      </ol>
+    </div>
+
+    <div class="col-12 mt-2 form-check">
+      {{ form.agree }} <label class="form-check-label" for="id_agree">I have agreed, read and Understood the rules for registering for portal access.</label>
+      {% for err in form.agree.errors %}<div class="invalid-feedback d-block">{{ err }}</div>{% endfor %}
+    </div>
+
+    <div class="col-12 mt-3 text-center">
+      <button class="btn btn-joy btn-lg">Submit Application</button>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,47 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.venv
+venv/
+env/
+
+# Database
+*.sqlite3
+*.sqlite3.bak
+*.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs & Outputs
+logs/
+*.log
+DIAGNOSTIC_REPORT.md
+makemigrations_out.txt
+makemigrations_output.txt
+migrate_out.txt
+showmigrations_out.txt
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# Django
+local_settings.py
+/media/

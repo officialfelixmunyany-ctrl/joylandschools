@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block title %}Register - Select Type{% endblock %}
+{% block content %}
+<div class="container my-5">
+  <h2 class="text-center mb-4">Register form</h2>
+  <p class="text-center">Complete the form below to access the school portal</p>
+  <div class="d-flex justify-content-center gap-3 mt-4">
+    <a class="btn btn-outline-primary" href="{% url 'register_student' %}">Register as Student</a>
+    <a class="btn btn-outline-primary" href="{% url 'register_teacher' %}">Register as Teacher</a>
+    <a class="btn btn-outline-primary" href="{% url 'register_parent' %}">Register as Parent</a>
+  </div>
+</div>
+{% endblock %}

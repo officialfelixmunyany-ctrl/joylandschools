@@ -1,0 +1,36 @@
+{% load static %}
+
+<!-- Modern Hero Section with responsive <picture> background and overlayed content -->
+<section class="hero" id="hero-particles" role="banner" aria-label="Hero: Joyland Schools">
+  <!-- Responsive art direction: choose the best image for the current viewport -->
+  <picture class="hero-picture" aria-hidden="true">
+    <source media="(min-width:1536px)" srcset="{% static 'images/hero/hero-large.jpg' %}">
+    <source media="(min-width:1024px)" srcset="{% static 'images/hero/hero-medium.jpg' %}">
+    <source media="(min-width:768px)" srcset="{% static 'images/hero/hero-small.jpg' %}">
+    <img class="hero-bg" src="{% static 'images/hero/hero-medium.jpg' %}" alt="Joyland Schools students" />
+  </picture>
+
+  <div class="hero-content container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <!-- Panel that holds the heading and CTAs; keeps text readable over images -->
+        <div class="hero-panel">
+          <h1 class="hero-title animate-fade">Welcome to Joyland Schools</h1>
+          <p class="hero-subtitle animate-fade">Excellence in Education · Innovation in Learning</p>
+
+          <div class="hero-cta">
+          <a href="{% url 'teacher_login' %}" class="btn btn-primary">
+            <i class="fas fa-chalkboard-user"></i> Teacher Portal
+          </a>
+          <a href="{% url 'role_login' role='parent' %}" class="btn btn-secondary">
+            <i class="fas fa-users"></i> Parent Portal
+          </a>
+          <a href="{% url 'role_login' role='student' %}" class="btn btn-outline" style="color: white; border-color: white;">
+            <i class="fas fa-graduation-cap"></i> Student Access
+          </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

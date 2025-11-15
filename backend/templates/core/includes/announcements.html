@@ -1,0 +1,10 @@
+{% comment %}Announcements partial - shows active announcements in order.{% endcomment %}
+{% load static %}
+{% if announcements %}
+  <div class="mb-4">
+    <div class="alert alert-info" role="status">
+      <strong>{{ announcements.0.title }}</strong>
+      <div class="mt-1">{{ announcements.0.message }}</div>
+    </div>
+  </div>
+{% endif %}

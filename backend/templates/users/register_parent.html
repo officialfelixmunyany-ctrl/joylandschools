@@ -1,0 +1,83 @@
+{% extends 'users/register_base.html' %}
+{% block form_fields %}
+  <div class="row g-3">
+    <div class="col-md-6">
+      <label class="form-label">First Name</label>
+      <input name="first_name" class="form-control">
+    </div>
+    <div class="col-md-6">
+      <label class="form-label">Last Name</label>
+      <input name="last_name" class="form-control">
+    </div>
+    <div class="col-12 mt-2">
+      <label class="form-label">E-mail <small class="text-muted">ex: myname@gmail.com</small></label>
+      <input name="email" class="form-control" placeholder="ex: myname@gmail.com">
+    </div>
+    <div class="col-md-3 mt-2">
+      <label class="form-label">Country code</label>
+      <input name="country_code" class="form-control">
+    </div>
+    <div class="col-md-9 mt-2">
+      <label class="form-label">Phone Number</label>
+      <input name="phone" class="form-control">
+    </div>
+    <div class="col-12 mt-2">
+      <label class="form-label">Address/Where do you live?</label>
+      <input name="address" class="form-control">
+    </div>
+
+    <div class="col-12 mt-2"> <label class="form-label">Birth date</label> </div>
+    <div class="col-md-4">
+      <select name="month" class="form-select"><option>Please select a month</option></select>
+    <div class="row g-3">
+      <div class="col-md-6">
+        {{ form.first_name.label_tag }}
+        {{ form.first_name }}
+        {% for err in form.first_name.errors %}<div class="invalid-feedback d-block">{{ err }}</div>{% endfor %}
+      </div>
+      <div class="col-md-6">
+        {{ form.last_name.label_tag }}
+        {{ form.last_name }}
+        {% for err in form.last_name.errors %}<div class="invalid-feedback d-block">{{ err }}</div>{% endfor %}
+      </div>
+      <div class="col-12 mt-2">
+        {{ form.email.label_tag }}
+        {{ form.email }}
+        {% for err in form.email.errors %}<div class="invalid-feedback d-block">{{ err }}</div>{% endfor %}
+      </div>
+      <div class="col-md-3 mt-2">
+        {{ form.country_code.label_tag }}
+        {{ form.country_code }}
+      </div>
+      <div class="col-md-9 mt-2">
+        {{ form.phone.label_tag }}
+        {{ form.phone }}
+      </div>
+      <div class="col-12 mt-2">
+        {{ form.address.label_tag }}
+        {{ form.address }}
+      </div>
+
+      <div class="col-12 mt-2"> <label class="form-label">Birth date</label> </div>
+      <div class="col-md-4">{{ form.month }}</div>
+      <div class="col-md-4">{{ form.day }}</div>
+      <div class="col-md-4">{{ form.year }}</div>
+
+      <div class="col-12 mt-3">
+        <h6>Registration rules</h6>
+        <ol>
+          <li>Parents must be linked to at least one enrolled student.</li>
+          <li>Contact details must be reachable during term time.</li>
+          <li>Accounts are subject to admin verification.</li>
+        </ol>
+      </div>
+
+      <div class="col-12 mt-2 form-check">
+        {{ form.agree }} <label class="form-check-label" for="id_agree">I have agreed, read and Understood the rules for registering for portal access.</label>
+        {% for err in form.agree.errors %}<div class="invalid-feedback d-block">{{ err }}</div>{% endfor %}
+      </div>
+
+      <div class="col-12 mt-3 text-center">
+        <button class="btn btn-joy btn-lg">Submit Application</button>
+      </div>
+    </div>

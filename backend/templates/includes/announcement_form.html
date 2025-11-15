@@ -1,0 +1,27 @@
+{% load static %}
+<form method="post" hx-post="{{ action_url }}" hx-target="#announcements-panel" hx-swap="innerHTML">
+  {% csrf_token %}
+  <div class="mb-2">
+    {{ form.title.label_tag }}
+    {{ form.title }}
+  </div>
+  <div class="mb-2">
+    {{ form.message.label_tag }}
+    {{ form.message }}
+  </div>
+  <div class="form-check mb-2">
+    {{ form.is_active }} {{ form.is_active.label_tag }}
+  </div>
+  <div class="mb-2">
+    {{ form.priority.label_tag }}
+    {{ form.priority }}
+  </div>
+  <div class="d-flex gap-2">
+    <button class="btn btn-joy btn-sm" type="submit">Save</button>
+    <button class="btn btn-outline-secondary btn-sm" type="button" hx-get="{% url 'announcements_partial' %}" hx-target="#announcements-panel" hx-swap="innerHTML">Cancel</button>
+  </div>
+</form>
+<script>
+  // Notify that modal content is ready
+  document.dispatchEvent(new CustomEvent('htmx:modal-ready', {detail:{}}));
+</script>

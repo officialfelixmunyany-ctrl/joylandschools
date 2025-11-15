@@ -1,0 +1,48 @@
+{% extends "admin/base_site.html" %}
+{% load static %}
+
+{% block content %}
+  <div class="container mt-3">
+    <h1>Welcome to Joyland Admin</h1>
+    <p class="lead">Manage users, students and school data from here.</p>
+
+    <div class="row">
+      <div class="col-md-3">
+        <div class="card text-white bg-primary mb-3">
+          <div class="card-body">
+            <h5 class="card-title">System Admins</h5>
+            <p class="card-text display-6">{{ system_admin_count }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-white bg-success mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Teachers</h5>
+            <p class="card-text display-6">{{ teacher_count }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-white bg-warning mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Students</h5>
+            <p class="card-text display-6">{{ student_count }}</p>
+          </div>
+        </div>
+      </div>
+      <!-- Parents removed -->
+    </div>
+
+    <h3>Quick Links</h3>
+    <ul>
+      <li><strong>Users</strong>
+        <ul>
+          <li><a href="{% url 'admin:users_studentprofile_changelist' %}">Student Profiles</a></li>
+          <li><a href="{% url 'admin:users_staffprofile_changelist' %}">Staff Profiles</a></li>
+          <li><a href="{% url 'admin:users_principalprofile_changelist' %}">Principal Profiles</a></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+{% endblock %}

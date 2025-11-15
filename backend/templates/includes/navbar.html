@@ -1,0 +1,125 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <img src="{% static 'images/logo.jpg' %}" alt="Joyland logo" style="height:36px;" class="me-2">
+      <span class="fw-bold">Joyland Schools</span>
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <!-- Desktop navigation (separate DOM tree, shown only on larger screens) -->
+    <ul class="navbar-nav ms-auto nav-desktop d-none d-lg-flex nav-close-brand" role="menubar" aria-label="Primary">
+        <li class="nav-item"><a class="nav-link" href="/curriculum/">Curriculum</a></li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="branchesDropdownDesktop" role="button" data-bs-toggle="dropdown" aria-expanded="false">Our Branches</a>
+          <ul class="dropdown-menu" aria-labelledby="branchesDropdownDesktop">
+            <li><a class="dropdown-item" href="/branches/main/">Main</a></li>
+            <li><a class="dropdown-item" href="/branches/joyland-mambowe/">Joyland Mambowe</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="admissionsDropdownDesktop" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admissions</a>
+          <ul class="dropdown-menu" aria-labelledby="admissionsDropdownDesktop">
+            <li><a class="dropdown-item" href="/admissions/join-us/">Join us</a></li>
+            <li><a class="dropdown-item" href="/admissions/appointment/">Make an appointment</a></li>
+            <li><a class="dropdown-item" href="/admissions/process/">Admission process</a></li>
+            <li><a class="dropdown-item" href="/admissions/term-dates-2025-26/">Term dates 2025/26</a></li>
+            <li><a class="dropdown-item" href="/admissions/school-fees-2025-26/">School Fees 2025/26</a></li>
+            <li><a class="dropdown-item" href="/admissions/online-test/">Online test</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="/vacancies/">Vacancies</a></li>
+
+        {# Portal menu — second to last #}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="portalsDropdownDesktop" role="button" data-bs-toggle="dropdown" aria-expanded="false">Portal</a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="portalsDropdownDesktop">
+            {% if user.is_authenticated %}
+              <li><a class="dropdown-item" href="{% url 'teacher_dashboard' %}">My Dashboard</a></li>
+              <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'user_logout' %}">Logout</a></li>
+            {% else %}
+              <li><a class="dropdown-item" href="{% url 'teacher_login' %}">Teacher Login</a></li>
+              <li><a class="dropdown-item" href="{% url 'student_access' %}">Student Access</a></li>
+              <li><a class="dropdown-item" href="{% url 'parents_portal' %}">Parents Portal</a></li>
+              <li><a class="dropdown-item" href="/admin/">Admin</a></li>
+            {% endif %}
+          </ul>
+        </li>
+
+        {# Contact us menu — last #}
+        <li class="nav-item"><a class="nav-link" href="/contact/">Contact us</a></li>
+
+        {# Live user status display #}
+        <li class="nav-item ms-2">
+          <a class="nav-link d-flex align-items-center" href="{% url 'presence_live' %}" title="View live activity">
+            <i class="fas fa-circle" style="color: #28a745; font-size: 0.6rem; margin-right: 6px;"></i>
+            <span class="badge bg-success">{{ presence_stats.current_online }}</span>
+          </a>
+        </li>
+    </ul>
+
+    <!-- Collapsible mobile navigation (separate DOM tree used for small screens) -->
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto nav-mobile">
+        <li class="nav-item"><a class="nav-link" href="/curriculum/">Curriculum</a></li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="branchesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Our Branches</a>
+          <ul class="dropdown-menu" aria-labelledby="branchesDropdown">
+            <li><a class="dropdown-item" href="/branches/main/">Main</a></li>
+            <li><a class="dropdown-item" href="/branches/joyland-mambowe/">Joyland Mambowe</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="admissionsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Admissions</a>
+          <ul class="dropdown-menu" aria-labelledby="admissionsDropdown">
+            <li><a class="dropdown-item" href="/admissions/join-us/">Join us</a></li>
+            <li><a class="dropdown-item" href="/admissions/appointment/">Make an appointment</a></li>
+            <li><a class="dropdown-item" href="/admissions/process/">Admission process</a></li>
+            <li><a class="dropdown-item" href="/admissions/term-dates-2025-26/">Term dates 2025/26</a></li>
+            <li><a class="dropdown-item" href="/admissions/school-fees-2025-26/">School Fees 2025/26</a></li>
+            <li><a class="dropdown-item" href="/admissions/online-test/">Online test</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item"><a class="nav-link" href="/vacancies/">Vacancies</a></li>
+
+        {# Portal menu — second to last #}
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="portalsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Portal</a>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="portalsDropdown">
+            {% if user.is_authenticated %}
+              <li><a class="dropdown-item" href="{% url 'teacher_dashboard' %}">My Dashboard</a></li>
+              <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="{% url 'user_logout' %}">Logout</a></li>
+            {% else %}
+              <li><a class="dropdown-item" href="{% url 'teacher_login' %}">Teacher Login</a></li>
+              <li><a class="dropdown-item" href="{% url 'student_access' %}">Student Access</a></li>
+              <li><a class="dropdown-item" href="{% url 'parents_portal' %}">Parents Portal</a></li>
+              <li><a class="dropdown-item" href="/admin/">Admin</a></li>
+            {% endif %}
+          </ul>
+        </li>
+
+        {# Contact us menu — last #}
+        <li class="nav-item"><a class="nav-link" href="/contact/">Contact us</a></li>
+
+        {# Live user status display #}
+        <li class="nav-item ms-2">
+          <a class="nav-link d-flex align-items-center" href="{% url 'presence_live' %}" title="View live activity">
+            <i class="fas fa-circle" style="color: #28a745; font-size: 0.6rem; margin-right: 6px;"></i>
+            <span class="badge bg-success">{{ presence_stats.current_online }}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+</nav>

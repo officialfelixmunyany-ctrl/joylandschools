@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block title %}Student Dashboard - Joyland Schools{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+  <div class="container">
+    <h1 class="dashboard-welcome animate-fade">Welcome, {{ student.get_full_name }}!</h1>
+    <p class="dashboard-subtitle animate-fade">Track your learning journey</p>
+  </div>
+</div>
+
+<div class="dashboard">
+  <div class="container">
+    <div class="row mt-8">
+      <div class="col-md-4 mb-6">
+        <div class="stat-card">
+          <div class="stat-value" data-count="87">0</div>
+          <div class="stat-label">Overall Grade</div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-6">
+        <div class="stat-card">
+          <div class="stat-value" data-count="24">0</div>
+          <div class="stat-label">Classes Attended</div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-6">
+        <div class="stat-card">
+          <div class="stat-value" data-count="8">0</div>
+          <div class="stat-label">Assignments Done</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Student Information -->
+    {% if profile %}
+    <div class="mt-12">
+      <div class="card">
+        <h2 class="card-title mb-6">Your Information</h2>
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            <strong>Admission Number:</strong>
+            <p>{{ profile.admission_number|default:"Not assigned" }}</p>
+          </div>
+          <div class="col-md-6 mb-4">
+            <strong>Assessment Number:</strong>
+            <p>{{ profile.assessment_number|default:"Not assigned" }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Quick Links Section -->
+    <div class="mt-12">
+      <h2 class="mb-8">Quick Access</h2>
+      <div class="row">
+        <div class="col-md-6 col-lg-3 mb-6">
+          <div class="tool-card text-center">
+            <div class="tool-icon"><i class="fas fa-book"></i></div>
+            <div class="tool-title">Study Materials</div>
+            <div class="tool-description">Access course resources</div>
+            <a href="#" class="btn btn-sm btn-primary mt-4">View</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-6">
+          <div class="tool-card text-center">
+            <div class="tool-icon"><i class="fas fa-tasks"></i></div>
+            <div class="tool-title">Assignments</div>
+            <div class="tool-description">Check your tasks</div>
+            <a href="#" class="btn btn-sm btn-primary mt-4">View</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-6">
+          <div class="tool-card text-center">
+            <div class="tool-icon"><i class="fas fa-chart-bar"></i></div>
+            <div class="tool-title">Performance</div>
+            <div class="tool-description">View your results</div>
+            <a href="#" class="btn btn-sm btn-primary mt-4">View</a>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-3 mb-6">
+          <div class="tool-card text-center">
+            <div class="tool-icon"><i class="fas fa-calendar"></i></div>
+            <div class="tool-title">Schedule</div>
+            <div class="tool-description">Class timetable</div>
+            <a href="#" class="btn btn-sm btn-primary mt-4">View</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Link -->
+    <div class="mt-12 text-center">
+      <a href="{% url 'landing' %}" class="btn btn-outline">Back to Home</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

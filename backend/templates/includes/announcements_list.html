@@ -1,0 +1,40 @@
+{% comment %}Full announcements list for admin-style management via HTMX{% endcomment %}
+<div class="card mb-4">
+  <div class="card-body">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h5 class="card-title mb-0">Announcements</h5>
+      <div>
+        <button class="btn btn-sm btn-outline-secondary" hx-get="{% url 'announcements_partial' %}" hx-target="#announcements-panel" hx-swap="innerHTML">Refresh</button>
+        {% if user.is_authenticated and user.role == 'system_admin' %}
+        <button class="btn btn-sm btn-outline-primary" hx-get="{% url 'announcement_create' %}" hx-target="#globalModalContent" hx-swap="innerHTML" hx-trigger="click">New</button>
+        {% endif %}
+      </div>
+    </div>
+
+    <ul class="list-group" id="announcements-list">
+      {% for a in announcements %}
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+          <div>
+            <strong>{{ a.title }}</strong>
+            <div class="small text-muted">{{ a.message }}</div>
+          </div>
+          <div class="btn-group btn-group-sm">
+            {% if user.is_authenticated and user.role == 'system_admin' %}
+            <button class="btn btn-outline-secondary" hx-get="{% url 'announcement_edit' a.pk %}" hx-target="#globalModalContent" hx-swap="innerHTML">Edit</button>
+            <button class="btn btn-outline-danger" hx-get="{% url 'announcement_delete' a.pk %}" hx-target="#globalModalContent" hx-swap="innerHTML">Delete</button>
+            {% endif %}
+          </div>
+        </li>
+      {% empty %}
+        <li class="list-group-item announce-empty d-flex justify-content-between align-items-center">
+          <div class="small text-muted">No announcements yet. <a href="{% url 'announcements_archive' %}">View archived notices</a> or, if you're an admin, post a new announcement.</div>
+          {% if user.is_authenticated and user.role == 'system_admin' %}
+            <div>
+              <button class="btn btn-sm btn-primary" hx-get="{% url 'announcement_create' %}" hx-target="#globalModalContent" hx-swap="innerHTML">New</button>
+            </div>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

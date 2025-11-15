@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Live Status — {{ site_status.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8 col-md-10">
+      <div class="card shadow">
+        <div class="card-header bg-primary text-white">
+          <h3 class="mb-0">Live Activity</h3>
+        </div>
+        <div class="card-body">
+          <div class="row text-center">
+            <div class="col-md-4 mb-4">
+              <div class="display-4 text-primary">{{ presence_stats.current_online }}</div>
+              <p class="text-muted">Users Online Now</p>
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="display-4 text-success">{{ presence_stats.today_unique }}</div>
+              <p class="text-muted">Unique Today</p>
+            </div>
+            <div class="col-md-4 mb-4">
+              <div class="display-4 text-warning">{{ presence_stats.today_peak }}</div>
+              <p class="text-muted">Peak Today</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
