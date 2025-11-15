@@ -1,33 +1,18 @@
 import os
 from pathlib import Path
+from decouple import config, Csv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# Allow overriding via environment for safer local/CI use; fallback keeps previous value.
-import os
-SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-please-change-me')
+SECRET_KEY = config('DJANGO_SECRET_KEY', default='django-insecure-dev-key-change-in-production')
 
 # For local development only
-DEBUG = True
+DEBUG = config('DEBUG', default=True, cast=bool)
 
 # ALLOWED_HOSTS configuration
-# - For development (DEBUG=True) we keep the permissive ['*'] so the
-#   dev server is reachable from LAN IPs (convenient for local testing).
-# - For safer control, you can set the DJANGO_ALLOWED_HOSTS environment
-#   variable to a comma-separated list of hosts (e.g. "localhost,127.0.0.1,192.168.1.6").
-ALLOWED_HOSTS_ENV = os.getenv('DJANGO_ALLOWED_HOSTS')
-if ALLOWED_HOSTS_ENV:
-    # allow a comma-separated env var to override
-    ALLOWED_HOSTS = [h.strip() for h in ALLOWED_HOSTS_ENV.split(',') if h.strip()]
-else:
-    if DEBUG:
-        # permissive during development only
-        ALLOWED_HOSTS = ['*']
-    else:
-        # production-safe default; update via DJANGO_ALLOWED_HOSTS when needed
-        ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='localhost,127.0.0.1,*', cast=Csv())
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -100,11 +85,8 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
 STATIC_URL = '/static/'
@@ -140,7 +122,7 @@ LOGGING = {
     'loggers': {
         '': {  # Root logger
             'handlers': ['console', 'file'],
-            'level': os.getenv('DJANGO_LOG_LEVEL', 'INFO'),
+            'level': config('DJANGO_LOG_LEVEL', default='INFO'),
         },
         'users': {
             'handlers': ['console', 'file'],
@@ -166,18 +148,12 @@ LOGOUT_REDIRECT_URL = 'landing'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'no-reply@joyland.local'
 
-# OpenAI Integration
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
-OPENAI_DEFAULT_MODEL = os.getenv('OPENAI_DEFAULT_MODEL', 'gpt-4')
-ENABLE_GPT5_MINI = os.getenv('ENABLE_GPT5_MINI', 'false').lower() in ('1', 'true', 'yes')
+# OpenAI Integration (optional)
+OPENAI_API_KEY = config('OPENAI_API_KEY', default=None)
+OPENAI_DEFAULT_MODEL = config('OPENAI_DEFAULT_MODEL', default='gpt-4')
+ENABLE_GPT5_MINI = config('ENABLE_GPT5_MINI', default=False, cast=bool)
 
-# === FEATURE FLAGS (AUTHENTICATION REFACTOR) ===
-# Enable role-aware login flow (teacher/parent/student-specific entry points)
-FEATURE_ROLE_AWARE_LOGIN = os.getenv('FEATURE_ROLE_AWARE_LOGIN', 'true').lower() in ('1', 'true', 'yes')
-
-# Enable shared login template consolidation (reduces duplication)
-FEATURE_SHARED_LOGIN_TEMPLATE = os.getenv('FEATURE_SHARED_LOGIN_TEMPLATE', 'true').lower() in ('1', 'true', 'yes')
-
-# Hide generic registration selector (forces role-specific registration)
-FEATURE_HIDE_GENERIC_REGISTRATION = os.getenv('FEATURE_HIDE_GENERIC_REGISTRATION', 'false').lower() in ('1', 'true', 'yes')
-# === END FEATURE FLAGS ===
+# Feature Flags
+FEATURE_ROLE_AWARE_LOGIN = config('FEATURE_ROLE_AWARE_LOGIN', default=True, cast=bool)
+FEATURE_SHARED_LOGIN_TEMPLATE = config('FEATURE_SHARED_LOGIN_TEMPLATE', default=True, cast=bool)
+FEATURE_HIDE_GENERIC_REGISTRATION = config('FEATURE_HIDE_GENERIC_REGISTRATION', default=False, cast=bool)
