@@ -33,7 +33,8 @@ def presence_stats(request):
     window = now - datetime.timedelta(minutes=5)
 
     try:
-        current_online = Presence.objects.filter(last_seen__gte=window).count()
+        # Only count authenticated users as online
+        current_online = Presence.objects.filter(last_seen__gte=window, user__isnull=False).count()
     except Exception:
         current_online = 0
 
