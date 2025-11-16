@@ -1,0 +1,69 @@
+/* Themed Color Background with Depth Illusions */
+:root {
+  --gradient-duration: 8s;
+  --depth-duration-1: 22s;
+  --depth-duration-2: 28s;
+  --depth-duration-3: 34s;
+  --moire-duration: 50s;
+  --shimmer-duration: 16s;
+  --bokeh-opacity: 0.35;
+  --depth-opacity-scale: 1.15;
+}
+
+#background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  overflow: hidden;
+  background: linear-gradient(135deg,
+    #667eea 0%,
+    #764ba2 25%,
+    #f093fb 50%,
+    #f5576c 75%,
+    #667eea 100%);
+  background-size: 200% 200%;
+  will-change: background-position;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  #background-container {
+    animation: gradientShift var(--gradient-duration) linear infinite;
+  }
+
+  @keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+}
+
+#background-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at 50% 40%,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(0, 0, 0, 0.15) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+#background-container::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 50%,
+    transparent 0%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* ...existing code... */

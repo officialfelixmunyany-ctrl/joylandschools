@@ -1,0 +1,176 @@
+/* Minimal custom stylesheet (recovery/repair)
+	 This file has been restored with a focused, minimal set of rules needed
+	 for the responsive navbar, dropdown behavior, and some basic layout
+	 tokens. If you had a larger custom.css, please restore the full file from
+	 your VCS or backups. For now this file keeps the site usable and fixes
+	 the mobile menu/accordion behavior requested. */
+
+/* Box-sizing and base */
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; }
+body { padding-bottom: 40px; background-color: #f7f7fb; color: #222; }
+
+/* Navbar and dropdown base styles (desktop behaviour preserved) */
+.navbar { background: white; }
+.navbar .dropdown > .dropdown-menu {
+	display: block;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateY(-6px);
+	transition: opacity 90ms ease, transform 110ms cubic-bezier(.2,.8,.2,1), visibility 0s linear 90ms;
+	pointer-events: none;
+	min-width: 10rem;
+	width: max-content;
+	max-width: calc(48vw);
+	white-space: nowrap;
+	box-shadow: 0 8px 30px rgba(37,20,49,0.12);
+	border-radius: 8px;
+	overflow: visible;
+	background-clip: padding-box;
+}
+.navbar .dropdown .dropdown-item { white-space: normal; }
+.navbar .dropdown:focus-within > .dropdown-menu,
+.navbar .dropdown.show > .dropdown-menu {
+	opacity: 1;
+	visibility: visible;
+	transform: translateY(0);
+	transition-delay: 0s;
+	pointer-events: auto;
+	transition: opacity 90ms ease, transform 110ms cubic-bezier(.2,.8,.2,1);
+}
+
+/* Mobile / small screens: full-width stacked menus and accordion-friendly layout */
+@media (max-width: 767.98px) {
+	.navbar { position: relative; }
+
+	/* Collapsed navbar panel should sit below the brand and cover the width */
+	.navbar-collapse {
+		position: absolute;
+		top: 100%; /* reliably below the navbar regardless of height */
+		left: 0;
+		right: 0;
+		background: rgba(255,255,255,0.995);
+		z-index: 1600;
+		padding: 0.5rem 0.75rem 1rem 0.75rem;
+		border-bottom: 1px solid rgba(0,0,0,0.04);
+		box-shadow: 0 8px 30px rgba(10,10,20,0.06);
+	}
+
+	/* Reduce outer container padding so the collapsed panel aligns visually with the viewport edges */
+	.navbar .container-fluid { padding-left: 0.5rem; padding-right: 0.5rem; }
+
+	.navbar-nav { display: flex; flex-direction: column; gap: 0.15rem; padding-left: 0; }
+	.navbar-nav .nav-item { width: 100%; }
+	.navbar-nav .nav-link { display: block; padding: 0.85rem 1rem; color: #222; background: transparent; }
+
+		/* Mobile dropdowns: flow element, full width (use more specific selector to
+			 ensure it overrides any other dropdown positioning rules coming from
+			 other stylesheets) */
+		.navbar-collapse .navbar-nav .dropdown > .dropdown-menu,
+		.navbar .collapse .navbar-nav .dropdown > .dropdown-menu {
+		position: static !important;
+		transform: none !important;
+		opacity: 1 !important;
+		visibility: visible !important;
+		pointer-events: auto !important;
+		display: block;
+		width: 100% !important;
+		max-width: none !important;
+			box-shadow: none !important;
+			border-radius: 0 !important;
+		margin: 0;
+		padding: 0.25rem 0;
+		background: rgba(255,255,255,0.98);
+	}
+
+	.navbar .dropdown .dropdown-menu .dropdown-menu,
+	.navbar .dropdown-submenu > .dropdown-menu {
+		position: static !important;
+		width: 100% !important;
+		max-width: none !important;
+		margin-left: 0.5rem;
+		padding-left: 0.5rem;
+		background: transparent;
+		box-shadow: none;
+	}
+
+	.navbar .dropdown .dropdown-item {
+		display: block;
+		width: 100%;
+		padding: 0.75rem 1rem;
+		white-space: normal;
+		border-bottom: 1px solid rgba(0,0,0,0.04);
+		color: #222;
+	}
+	.navbar .dropdown .dropdown-item:last-child { border-bottom: none; }
+
+	.navbar .dropdown .dropdown-item .fa,
+	.navbar .dropdown .dropdown-item .fas,
+	.navbar .dropdown .dropdown-item .icon { margin-right: 0.7rem; width: 1.1rem; text-align: left; }
+
+	.navbar .dropdown .dropdown-toggle::after { float: right; margin-left: 0.5rem; }
+
+	/* Make the toggle act like a full-width list item and align caret */
+	.navbar .dropdown-toggle {
+		display: flex !important;
+		justify-content: space-between !important;
+		align-items: center !important;
+		width: 100% !important;
+		padding: 0.85rem 1rem !important;
+		background: transparent !important;
+		border: none !important;
+	}
+
+	/* rotate caret when open */
+	.navbar .dropdown.show > .dropdown-toggle::after {
+		transform: rotate(180deg);
+		transition: transform 180ms ease;
+	}
+
+	.navbar .dropdown > .dropdown-menu { max-height: calc(100vh - 120px); overflow:auto; -webkit-overflow-scrolling: touch; }
+
+	.navbar-collapse.collapse { display: none; }
+	.navbar-collapse.collapse.show { display: block; }
+}
+
+/* Small helpers */
+.visually-hidden-focusable:focus { position: static; left: auto; top: auto; }
+
+/* Desktop-specific nav rules scoped to `.nav-desktop` to avoid any collision
+	 with mobile styles. This ensures two separate systems (desktop vs mobile). */
+@media (min-width: 768px) {
+	.nav-desktop { display: flex; }
+	.nav-desktop .navbar-nav { display: flex; gap: 0.5rem; align-items: center; }
+
+	.nav-desktop .dropdown > .dropdown-menu {
+		display: block;
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(-6px);
+		transition: opacity 90ms ease, transform 110ms cubic-bezier(.2,.8,.2,1), visibility 0s linear 90ms;
+		pointer-events: none;
+		min-width: 10rem;
+		width: max-content;
+		max-width: calc(48vw);
+		white-space: nowrap;
+		box-shadow: 0 8px 30px rgba(37,20,49,0.12);
+		border-radius: 8px;
+		overflow: visible;
+		background-clip: padding-box;
+	}
+
+	.nav-desktop .dropdown .dropdown-item { white-space: normal; }
+
+	.nav-desktop .dropdown:focus-within > .dropdown-menu,
+	.nav-desktop .dropdown.show > .dropdown-menu {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+		transition-delay: 0s;
+		pointer-events: auto;
+		transition: opacity 90ms ease, transform 110ms cubic-bezier(.2,.8,.2,1);
+	}
+}
+
+/* End of minimal custom.css recovery */
+
